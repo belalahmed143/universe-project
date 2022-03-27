@@ -27,11 +27,9 @@
     <link rel="stylesheet" href="{% static 'frontend_assets/css/category.css'%}">
     <link rel="stylesheet" href="{% static 'frontend_assets/css/product.css'%}">
     <link rel="stylesheet" href="{% static 'frontend_assets/css/media.css'%}">
-
 </head>
    
     {% include 'navbar.html' %} 
-
     
     {% block content %}
         
@@ -45,6 +43,29 @@
 
     <!-- Your Chat Plugin code -->
     <div id="fb-customer-chat" class="fb-customerchat"></div>
+    
+    <!-- success message show start -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+            {% for message in messages %}
+            Toast.fire({
+            icon: 'success',
+            title: '{{ message }}',
+            })
+            {% endfor %}
+    </script>
+    <!-- success message show end -->
 
     <script>
       var chatbox = document.getElementById("fb-customer-chat");

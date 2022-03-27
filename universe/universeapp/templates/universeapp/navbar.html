@@ -1,3 +1,5 @@
+{% load service %}
+{% load project %}
 <nav class="navbar nav navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">
@@ -99,19 +101,28 @@
         </li>
 
         <li>
-          <a class="nav-link" href="">Services</a>
+          <a class="nav-link" href="{% url 'service' %}">Services</a>
 
           <ul>
-            <!-- {% for i in links %} -->
-            <!-- <li>
-              <a href="{{i.get_url}}">{{i.name}}</a>
-            </li> -->
-            <!-- {% endfor %} -->
+            {% for i in request|service %}
+            <li>
+              <a href="{{ i.get_service_detail_link }}">{{ i.title }}</a>
+            </li>
+
+            {% endfor %}
           </ul>
         </li>
 
         <li>
-          <a class="nav-link" href="">Project</a>
+          <a class="nav-link" href="{% url 'project' %}">Project</a>
+          <ul>
+            {% for p in request|project %}
+            <li>
+              <a href="{{ i.get_project_detail_link }}">{{ p.title }}</a>
+            </li>
+
+            {% endfor %}
+          </ul>
         </li>
 
         <li>
